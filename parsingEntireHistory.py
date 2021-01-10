@@ -5,11 +5,11 @@ def getData():
     file = open('YahooTickers.json', 'r')
     tickers = json.loads(file.read())
     file.close()
-    i = len(next(os.walk('Stock/'))[2]) + 1
+    i = len(next(os.walk('Stocks/'))[2]) + 1
 
     while i < len(tickers['Stock']):
         currentTicker = tickers['Stock'][i]['Yahoo Stock Tickers']
-        path = 'Stock/' + currentTicker + '.json'
+        path = 'Stocks/' + currentTicker + '.json'
         url = "https://query1.finance.yahoo.com/v8/finance/chart/{0}?symbol={0}&period1=0&period2=9999999999&interval=1d&includePrePost=true&events=div%2Csplit".format(
             currentTicker)
         r = requests.get(url)
@@ -17,7 +17,6 @@ def getData():
         f = open(path, 'w')
         f.write(json_string)
         f.close()
-    #    print(currentTicker + " was added.")
         i = i + 1
 
     file = open('YahooTickers.json', 'w')
@@ -29,7 +28,7 @@ def getData():
 def main():
     file = open('YahooTickers.json', 'r')
     tickers = json.loads(file.read())
-    if len(tickers['Stock']) != (len(next(os.walk('Stock/'))[2]) + 1):
+    if len(tickers['Stock']) != (len(next(os.walk('Stocks/'))[2]) + 1):
         getData()
     file.close()
 
