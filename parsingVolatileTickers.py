@@ -24,7 +24,7 @@ def getTickers():
 
 def getTop20(nasdaqList, moexList):
     topVolat = list()
-    i = 5000
+    i = 0
     while (i < len(nasdaqList)):
         currentTicker = nasdaqList[i]
         print(str(currentTicker) + " " + str(i))
