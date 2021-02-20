@@ -55,7 +55,6 @@ def getTop(nasdaqList, moexList):
         i += 1
 
     topVolat.sort(key=volF, reverse = True)
-    #print(topVolat)
     file = open('topVolatility.json', 'w')
     file.write(json.dumps(topVolat))
     file.close()
