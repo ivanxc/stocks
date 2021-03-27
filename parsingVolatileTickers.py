@@ -32,7 +32,7 @@ def getTop(nasdaqList, moexList):
             currentTicker)
         r = requests.get(url)
         ticker = r.json()
-        if ticker["chart"]["result"] == None or len(ticker["chart"]["result"][0]["indicators"]["quote"][0]) == 0 or len(ticker["chart"]["result"][0]["timestamp"]) < 33:
+        if len(ticker) < 1000 or ticker["chart"]["result"] == None or len(ticker["chart"]["result"][0]["indicators"]["quote"][0]) == 0 or len(ticker["chart"]["result"][0]["timestamp"]) < 33:
             i += 1
             continue
         volatility = getVolatility(ticker)
@@ -47,7 +47,7 @@ def getTop(nasdaqList, moexList):
             currentTicker)
         r = requests.get(url)
         ticker = r.json()
-        if ticker["chart"]["result"] == None or len(ticker["chart"]["result"][0]["indicators"]["quote"][0]) == 0 or len(ticker["chart"]["result"][0]["timestamp"]) < 33:
+        if len(ticker) > 1000 or ticker["chart"]["result"] == None or len(ticker["chart"]["result"][0]["indicators"]["quote"][0]) == 0 or len(ticker["chart"]["result"][0]["timestamp"]) < 33:
             i += 1
             continue
         volatility = getVolatility(ticker)
@@ -55,6 +55,7 @@ def getTop(nasdaqList, moexList):
         i += 1
 
     topVolat.sort(key=volF, reverse = True)
+    #print(topVolat)
     file = open('topVolatility.json', 'w')
     file.write(json.dumps(topVolat))
     file.close()
@@ -65,7 +66,7 @@ def volF(item):
 def getVolatility(ticker):
     length = len(ticker["chart"]["result"][0]["timestamp"])
     closeList = list()
-    j = 1
+    j = 2
     counter = 0
     while counter < 31:
         if ticker["chart"]["result"][0]["indicators"]["quote"][0]["close"][length-j] != None:
@@ -81,7 +82,12 @@ def getVolatility(ticker):
     return numpy.var(volatList)/sqrt(30)
 
 def main():
-    getTickers()
+   getTickers()
+   file = open('topVolatility.json', 'r')
+   a = file.read()
+   b = json.loads(a)
+   file.close()
+   print(dict(b))
 
 
 if __name__ == "__main__":
