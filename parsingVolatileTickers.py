@@ -81,6 +81,7 @@ def getVolatility(ticker):
         volatList.append((divide - 1) * 100)
     return numpy.var(volatList)/sqrt(30)
 
+
 def main():
    getTickers()
    file = open('topVolatility.json', 'r')
