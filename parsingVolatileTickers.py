@@ -1,6 +1,7 @@
 import os, json, requests, re, numpy
 from math import sqrt
 
+
 def getTickers():
     url = "http://ftp.nasdaqtrader.com/dynamic/SymDir/nasdaqtraded.txt"
     nasdaqTickers = list()
