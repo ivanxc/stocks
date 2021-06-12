@@ -1,5 +1,5 @@
 import sys
-sys.path.append('C:/Users/Иван/PycharmProjects/pythonProject')
+sys.path.append('/')
 import getHistory
 import json
 from sklearn.preprocessing import MinMaxScaler
