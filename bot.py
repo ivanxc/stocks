@@ -2,7 +2,7 @@ import telebot
 import sys
 import getHistory
 import machinelearning
-sys.path.append('C:/Users/Иван/PycharmProjects/pythonProject')
+sys.path.append('/')
 
 bot = telebot.TeleBot('1835056120:AAF-hyyEFichtUQeai371dRw3V1f2aQWB1U')
 
